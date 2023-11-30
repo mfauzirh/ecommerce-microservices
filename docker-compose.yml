@@ -6,6 +6,12 @@ services:
   catalogdb:
     image: mongo
 
+  basketdb:
+    image: redis:alpine
+
+  portainer:
+    image: portainer/portainer-ce
+
   catalog.api:
     image: catalog.api
     build:
@@ -14,5 +20,14 @@ services:
     ports:
       - 5000:5000
 
+  basket.api:
+    image: basket.api
+    build:
+      context: .
+      dockerfile: src/Services/basket/Basket.API/Dockerfile
+    ports:
+      - 5001:5001
+
 volumes:
   mongo_data:
+  portainer_data:
